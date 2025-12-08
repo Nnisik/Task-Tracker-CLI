@@ -1,6 +1,9 @@
+package classes;
+
 import java.time.LocalDate;
 
 public class Task {
+
     private String description;
     private String status = "todo";
     private LocalDate createdAt;
@@ -9,6 +12,7 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.createdAt = LocalDate.now();
+        System.out.println("** new task created **");
     }
 
     public String getDescription() {

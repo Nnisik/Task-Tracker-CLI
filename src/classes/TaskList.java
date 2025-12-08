@@ -1,11 +1,19 @@
+package classes;
+
 import java.util.ArrayList;
 
 public class TaskList {
     public ArrayList<Task> taskList = new ArrayList<>();
 
     public void displayTaskList() {
-        for (int i = 0; i < taskList.size(); i++) {
-            System.out.println(i + 1 + " | " + taskList.get(i).getDescription());
+
+        if (taskList.isEmpty()) {
+            System.out.println("no task created");
+        }
+        else {
+            for (int i = 0; i < taskList.size(); i++) {
+                System.out.println(i + 1 + " | " + taskList.get(i).getDescription());
+            }
         }
     }
 
