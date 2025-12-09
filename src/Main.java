@@ -1,6 +1,5 @@
 import classes.TaskList;
 
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Main {
@@ -11,6 +10,8 @@ public class Main {
 
         String newCommand;
         String command = "";
+
+        int index;
 
         while (true) {
             System.out.print("task-cli ");
@@ -28,20 +29,43 @@ public class Main {
                     newCommand = newCommand.substring(1);
                 }
 
-                newCommand = newCommand.substring(1);
+                switch(command) {
+                    case "add":
+                        taskList.addTask(newCommand);
+                        break;
+
+                    case "update":
+                        index = Integer.parseInt(String.valueOf(newCommand.charAt(1)));
+                        String newDescription = newCommand.substring(2);
+                        taskList.updateTaskDescription(index, newDescription);
+                        break;
+
+                    case "delete":
+                        index = Integer.parseInt(String.valueOf(newCommand.charAt(1)));
+                        taskList.deleteTask(index);
+                        break;
+
+                    case "mark-in-progress":
+                        index = Integer.parseInt(String.valueOf(newCommand.charAt(1)));
+                        taskList.updateTaskStatus(index, "in progress");
+                        break;
+
+                    case "mark-done":
+                        index = Integer.parseInt(String.valueOf(newCommand.charAt(1)));
+                        taskList.updateTaskStatus(index, "done");
+                        break;
+
+                    case "list":
+                        String status = newCommand.substring(1, newCommand.length());
+                        taskList.displayTaskList(status);
+                        break;
+
+                    default:
+                        System.out.println("no such command");
+                        System.out.println(command);
+                        break;
+                }
             }
-
-            switch(command) {
-                case "add":
-                    taskList.addTask(newCommand);
-                    break;
-
-                default:
-                    System.out.println("no such command");
-                    break;
-            }
-
-            // taskList.displayTaskList();
 
             command = "";
 

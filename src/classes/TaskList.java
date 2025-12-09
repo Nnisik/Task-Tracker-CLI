@@ -12,8 +12,26 @@ public class TaskList {
         }
         else {
             for (int i = 0; i < taskList.size(); i++) {
-                System.out.println(i + 1 + " | " + taskList.get(i).getDescription());
+                System.out.print(i + 1 + " | " + taskList.get(i).getDescription() + " | ");
+                System.out.println(taskList.get(i).getStatus());
             }
+        }
+    }
+
+    public void displayTaskList(String status) {
+        if (taskList.isEmpty()) {
+            System.out.println("no task created");
+        }
+        else {
+            TaskList resultTaskList = new TaskList();
+
+            for (Task task: this.taskList) {
+                if (task.getStatus().equals(status)) {
+                    resultTaskList.addTask(task);
+                }
+            }
+
+            resultTaskList.displayTaskList();
         }
     }
 
@@ -21,15 +39,29 @@ public class TaskList {
         this.taskList.add(new Task(description));
     }
 
-    public void updateTaskDescription(int taskId, String taskDescription) {
-        this.taskList.get(taskId - 1).updateDescription(taskDescription);
+    public void addTask(Task task) {
+        this.taskList.add(task);
     }
 
-    public void updateTaskStatus(int taskId) {
-        this.taskList.get(taskId - 1).updateStatus();
+    public void updateTaskDescription(int taskId, String taskDescription) {
+        try {
+            this.taskList.get(taskId - 1).updateDescription(taskDescription);
+        }
+        catch(Exception e) {
+            System.out.println("Error accured. Check if needed task exist.");
+        }
+    }
+
+    public void updateTaskStatus(int taskId, String newStatus) {
+        this.taskList.get(taskId - 1).updateStatus(newStatus);
     }
 
     public void deleteTask(int taskId) {
-        this.taskList.remove(taskId - 1);
+        try {
+            this.taskList.remove(taskId - 1);
+        }
+        catch(Exception e) {
+            System.out.println("Error accured. Check if needed task exist.");
+        }
     }
 }

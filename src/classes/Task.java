@@ -12,7 +12,6 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.createdAt = LocalDate.now();
-        System.out.println("** new task created **");
     }
 
     public String getDescription() {
@@ -24,16 +23,12 @@ public class Task {
         this.updatedAt = LocalDate.now();
     }
 
-    public void updateStatus() {
-        this.updatedAt = LocalDate.now();
-        switch(this.status) {
-            case "todo":
-                this.status = "in-progress";
-                break;
+    public String getStatus() {
+        return this.status;
+    }
 
-            case "in-progress":
-                this.status = "done";
-                break;
-        }
+    public void updateStatus(String newStatus) {
+        this.updatedAt = LocalDate.now();
+        this.status = newStatus;
     }
 }
